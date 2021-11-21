@@ -1,0 +1,114 @@
+
+
+
+
+
+{% block body %}
+    <section>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" href="headers.css">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+
+
+
+<header class="p-3 bg-dark text-white mb-5">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{{path('product_all')}}" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="{{path('shopcart_new')}}" class="nav-link px-2 text-white">GIVE ORDER</a></li>
+          <li><a href="{{path('shopcart_index')}}" class="nav-link px-2 text-white">SHOPTCART</a></li>
+          <li><a href="{{path('orders_index')}}" class="nav-link px-2 text-white">ORDER HISTORY</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+         {{app.user.email}}
+        </div>
+    </div>
+  </header>
+  
+
+<div class="container">
+ 
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<div class="row">
+							<div class="col-md-6">
+								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+							</div>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+                {% set total=0 %}
+                        {% for shopcart in shopcarts %}
+					<div class="row">
+						<div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+						</div>
+                        
+						<div class="col-xs-4">
+							<h4 class="product-name"><strong>{{ shopcart.title }}</strong></h4><h4><small>Product description</small></h4>
+						</div>
+						<div class="col-xs-6">
+							<div class="col-xs-6 text-right">
+								<h6><strong> {% set total = total + (shopcart.quantity * shopcart.price) %}{{ shopcart.quantity * shopcart.price }}<span class="text-muted"> $</span></strong></h6>
+							</div>
+							
+							<div class="col-xs-4">
+								<input type="text" class="form-control input-sm" value="{{ shopcart.quantity }}">
+							</div>
+							<div class="col-xs-2">
+								<a href="{{ path('shopcart_del', {'id': shopcart.id}) }}" onclick="return confirm('Silinecek Emin misin?');"><span class="glyphicon glyphicon-trash" > </span></a>
+									
+								</a>
+							</div>
+						</div>
+					</div>
+					<hr>
+                    
+					{% endfor %}
+					<hr>
+					<div class="row">
+						<div class="text-center">
+							
+							<div class="col-xs-3">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class="row text-center">
+						<div class="col-xs-9">
+                        {%for shopcart in shopcarts %} {% endfor %}
+							<h4 class="text-right">Total {{ total }}<strong></strong></h4>
+						</div>
+						<div class="col-xs-3">
+							<a href="{{path('orders_new')}}"class="btn btn-success btn-block">
+								Checkout
+							</a>
+						</div>
+						<p> sepette 2. ürüne %50 indirim kampanyamız dahilinde sepetinizde 2 ürün varsa toplam tutardan 2. ürünün %50'si düşülecektir<p>
+						<p>erkek ayakkabı kategorisinde 3 alana 1 bedava kampanyamız dahilinde sepetinizde 3 ya da daha fazla daha erkek ayakkabı ürünü varsa tutardan 1 ürün fiyatı düşülecektir </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    </section>
+
+{% endblock %}

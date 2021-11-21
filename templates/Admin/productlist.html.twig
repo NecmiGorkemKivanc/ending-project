@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Product Page - Admin HTML Template</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+      
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="product-admin-master/css/fontawesome.min.css" />
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="product-admin-master/css/bootstrap.min.css" />
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="product-admin-master/css/templatemo-style.css">
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+	-->
+  </head>
+
+  <body id="reportsPage">
+
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{{path('product_all')}}" class="nav-link px-2 text-secondary">Home</a></li>
+          <li><a href="{{path('shopcart_index')}}" class="nav-link px-2 text-white">SHOPCART</a></li>
+          <li><a href="{{path('orders_new')}}" class="nav-link px-2 text-white">GIVE ORDER</a></li>
+          <li><a href="{{path('orders_index')}}" class="nav-link px-2 text-white">ORDER HISTORY</a></li>
+          <li><a href="{{path('all_categories')}}" class="nav-link px-2 text-white">All categories</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+         {{app.user.email}}
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <header class="p-3 mb-3 border-bottom">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center mx-auto justify-content-center justify-content-lg-start">
+        
+{% if is_granted('ROLE_ADMIN') %}
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" ">
+          <li><a href="{{path('category_new')}}" class="nav-link px-2 link-secondary">Add categories</a></li>
+          <li><a href="{{path('all_categories')}}" class="nav-link px-2 link-dark">Categories</a></li>
+          <li><a href="{{path('product_list')}}" class="nav-link px-2 link-dark">Product List</a></li>
+          <li><a href="{{path('product_new')}}" class="nav-link px-2 link-dark">Add Products</a></li>
+          <li><a href="{{path('product_new')}}" class="nav-link px-2 link-dark">Delete Products</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <label>BU PANELİ SADECE ROLÜ ADMİN OLANLAR GÖREBİLİR</label>
+        </form> {%endif%}
+
+        <div class="dropdown text-end">
+          
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-xl">
+      <div class="container h-100">
+       
+        <button
+          class="navbar-toggler ml-auto mr-0"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars tm-nav-icon"></i>
+        </button>
+
+       
+    <div class="container mt-5">
+      <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-products">
+            <div class="tm-product-table-container">
+              <table class="table table-hover tm-table-small tm-product-table">
+                <thead>
+                  <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">PRODUCT NAME</th>
+                    <th scope="col">UNIT SOLD</th>
+                    <th scope="col">IN STOCK</th>
+                    
+                    <th scope="col">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for product in product %}
+                  <tr>
+                    <th scope="row"><input type="checkbox" value={{product.id}} /></th>
+                    <td class="tm-product-name"> <a href="{{ path('product_detail', {'id': product.id}) }}">{{product.title}}</a></td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.amount}}</td>
+                    <td>
+                     <a href="{{ path('product_delete', {'id': product.id}) }}" onclick="return confirm('Silinecek Emin misin?');"><span class="glyphicon glyphicon-trash" > </span>
+                        <p> delete </p></a>
+                      </a>
+                    </td>
+                    <td>
+                     <a href="{{ path('update_product', {'id': product.id}) }}"><span class="glyphicon glyphicon-trash" > </span>
+                        <p> update </p></a>
+                      </a>
+                    </td>
+                  </tr>
+                 {%endfor%}
+                </tbody>
+              </table>
+            </div>
+            <!-- table container -->
+            <a
+              href="{{path('product_new')}}"
+              class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
+           
+          </div>
+        </div>
+        
+    <footer class="tm-footer row tm-mt-small">
+      <div class="col-12 font-weight-light">
+        
+      </div>
+    </footer>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script>
+      $(function() {
+        $(".tm-product-name").on("click", function() {
+          window.location.href = "edit-product.html";
+        });
+      });
+    </script>
+  </body>
+</html>

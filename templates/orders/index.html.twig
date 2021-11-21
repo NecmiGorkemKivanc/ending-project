@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/headers/">
+
+<link rel="stylesheet" href="headers.css">
+<style>
+  body {
+    background: #eee;
+  }
+
+  .panel-order .row {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .panel-order .row:last-child {
+    border: 0px;
+  }
+
+  .panel-order .row .col-md-1 {
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  .panel-order .row .col-md-1 img {
+    width: 50px;
+    max-height: 50px;
+  }
+
+  .panel-order .row .row {
+    border-bottom: 0;
+  }
+
+  .panel-order .row .col-md-11 {
+    border-left: 1px solid #ccc;
+  }
+
+  .panel-order .row .row .col-md-12 {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .panel-order .row .row .col-md-12:last-child {
+    font-size: 11px;
+    color: #555;
+    background: #efefef;
+  }
+
+  .panel-order .btn-group {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .panel-order .panel-body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .panel-order .panel-deading {
+    margin-bottom: 0;
+  }
+
+  .d-flex .nav li:first-child {
+    margin-left: 450px;
+  }
+</style>
+
+
+<header class="p-3 bg-dark text-white">
+  <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+
+    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+      <li><a href="{{path('product_all')}}" class="nav-link px-2 text-secondary">Home</a></li>
+      <li><a href="{{path('shopcart_new')}}" class="nav-link px-2 text-white">GIVE ORDER</a></li>
+      <li><a href="{{path('shopcart_index')}}" class="nav-link px-2 text-white">SHOPCART</a></li>
+      <li><a href="{{path('orders_index')}}" class="nav-link px-2 text-white">ORDER HISTORY</a></li>
+      <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+    </ul>
+
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+      <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+    </form>
+
+    <div class="text-end">
+      {{app.user.email}}
+    </div>
+  </div>
+</header>
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<div class="container bootdey">
+  <div class="panel panel-default panel-order">
+    <div class="panel-heading">
+      <strong>Order history</strong>
+      <div class="btn-group pull-right">
+        <div class="btn-group">
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="#">Approved orders</a></li>
+            <li><a href="#">Pending orders</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% for order in orders %}
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-1"><img src="https://bootdey.com/img/Content/user_3.jpg"
+            class="media-object img-thumbnail" /></div>
+        <div class="col-md-11">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="pull-right"><label class="label label-danger">rejected</label></div>
+              <span><strong>{{ order.name }}</strong></span> <span class="label label-info">group name</span><br />
+              cost: {{order.amount}} <br />
+              <a data-placement="top" class="btn btn-success btn-xs glyphicon glyphicon-ok" href="{{ path('orders_show', {'id': order.id}) }}" title="View"></a>
+             
+            </div>
+            <div></div>
+           
+          </div>
+        </div>
+      </div>
+    </div> {%endfor%}
+  </div>

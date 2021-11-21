@@ -1,0 +1,27 @@
+<section>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="left-sidebar">
+                <div class="brands_products"><!--brands_products-->
+                    <h2>User Menu</h2>
+                    <div class="brands-name">
+                        <ul class="nav nav-pills nav-stacked">
+
+                            
+
+                            {{ app.user.email }} 
+                            <li><a href="/orders"> <span class="pull-right"></span>My Order</a></li>
+                            <li><a href="/orders/new"> <span class="pull-right"></span>Give Order</a></li>
+                            <li><a href="/shopcart"> <span class="pull-right"></span>My Cart</a></li>
+                            <li><a href="/logout"> <span class="pull-right"></span>Logout</a></li>
+                            
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>

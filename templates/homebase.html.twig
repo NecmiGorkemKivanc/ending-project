@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block description %}En iyi online E-Ticaret sitesi{% endblock %}">
+        <meta name="keywords" content="{% block keywords %}urun,satis,alim,satim,ticaret{% endblock %}">
+        <meta name="author" content="">
+        <title>Best Online E-Commerce Site!</title>
+       
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+           
+            <section>
+                <div class="container">
+                    <div class="row">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </section>
+           
+            {% block javascripts %} {% include('home/javascript.html.twig') %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,75 @@
+
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  body {
+    background: #eee
+}
+
+.ratings i {
+    font-size: 16px;
+    color: red
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h5 {
+    font-weight: 400
+}
+
+.para {
+    font-size: 16px
+}
+  </style>
+  <div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+   {%for product in product %} 
+        <div class="col-md-10">
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="https://s3.amazonaws.com/mentoring.redesign/s3fs-public/900product.jpg"></div>
+                <div class="col-md-6 mt-1">
+                    <h5>{{product.title}}</h5>
+                    <div class="d-flex flex-row">
+                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                    </div>
+                    <div class="mt-1 mb-1 spec-1"><h6>PRODUCT ID(AŞAĞIDAKİ KISMA GİRİLMESİ GEREKEN YER) :{{product.id}}</h6></div>
+                    <div class="mt-1 mb-1 spec-1"></div>
+                  
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <h4 class="mr-1">{{product.price}} $</h4>
+                    </div>
+                    <h6 class="text-success">Free shipping</h6>
+                
+                    <div class="d-flex flex-column mt-4"></div>
+                </div>
+            </div>
+           
+</div>
+ {%endfor%}    {{ include('shopcart/_form.html.twig') }}
